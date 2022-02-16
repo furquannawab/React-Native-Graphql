@@ -31,4 +31,12 @@ exports.Mutation = {
     __.reviews.push(newReview);
     return newReview;
   },
+
+  deleteCategory: (_, args, __) => {
+    const index = __.categories.findIndex(
+      (category) => category.name === args.input
+    );
+    __.categories.splice(index, 1);
+    return true;
+  },
 };
