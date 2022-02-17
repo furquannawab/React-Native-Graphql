@@ -34,9 +34,50 @@ exports.Mutation = {
 
   deleteCategory: (_, args, __) => {
     const index = __.categories.findIndex(
-      (category) => category.name === args.input
+      (category) => category.id === args.input
     );
-    __.categories.splice(index, 1);
-    return true;
+    return __.categories.splice(index, 1) ? true : false;
+  },
+
+  deleteProduct: (_, args, __) => {
+    const index = __.products.findIndex((product) => product.id === args.input);
+    return __.products.splice(index, 1) ? true : false;
+  },
+
+  deleteReview: (_, args, __) => {
+    const index = __.reviews.findIndex((review) => review.id === args.input);
+    return __.reviews.splice(index, 1) ? true : false;
+  },
+
+  updateCategory: (_, args, __) => {
+    const index = __.categories.findIndex(
+      (category) => category.id === args.id
+    );
+    __.categories[index] = {
+      ...__.categories[index],
+      ...args.input,
+    };
+
+    return __.categories[index];
+  },
+
+  updateProduct: (_, args, __) => {
+    const index = __.products.findIndex((product) => product.id === args.id);
+    __.products[index] = {
+      ...__.products[index],
+      ...args.input,
+    };
+
+    return __.products[index];
+  },
+
+  updateReview: (_, args, __) => {
+    const index = __.reviews.findIndex((review) => review.id === args.id);
+    __.reviews[index] = {
+      ...__.reviews[index],
+      ...args.input,
+    };
+
+    return __.reviews[index];
   },
 };
